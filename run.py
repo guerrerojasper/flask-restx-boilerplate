@@ -6,3 +6,10 @@ app = create_app(
 
 if __name__ == '__main__':
     app.run()
+
+
+"""
+notes:
+ - mongoengine 
+   - pip install git+https://github.com/idoshr/flask-mongoengine.git@1.0.1
+"""

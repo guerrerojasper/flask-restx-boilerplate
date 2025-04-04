@@ -2,6 +2,7 @@ from flask import Flask
 from flask_restx import Api
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_mongoengine import MongoEngine
 
 
 db = SQLAlchemy()
@@ -18,8 +19,14 @@ def create_app(config_class=None):
 
     if config_class: # Override config (eg. test, prod, dev)
         app.config.from_object(config_class)
+    
+    app.config['MONGODB_SETTINGS'] = {
+        'db': 'mydatabase',  # Database name
+        'host': 'mongodb://localhost:27017/mydatabase'  # MongoDB URI
+    }
 
     db.init_app(app)
+    mongo_db = MongoEngine(app)
     api.init_app(app)
 
     from app.register import register_routes
