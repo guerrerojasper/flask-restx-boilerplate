@@ -1,2 +1,2 @@
 from .user_details import UserDocument, AddressDocument
-from .post import PostDocument
+from .post import PostDocument, CommentDocument

@@ -10,6 +10,13 @@ post_model = api.model(
         'comment': fields.List(fields.Raw(), description='Optional payload for comments.')
     }
 )
+post_update_model = api.model(
+    'PostUpdateDocument',
+    {
+        'title': fields.String(required=True, description='The post title.'),
+        'content': fields.String(required=True, description='The post content.')
+    }
+)
 
 post_response_model = api.model(
     'PostDocument',

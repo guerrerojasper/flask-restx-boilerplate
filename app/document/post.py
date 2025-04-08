@@ -1,9 +1,15 @@
 from mongoengine import Document, StringField, ReferenceField, ListField, EmbeddedDocument, EmbeddedDocumentField
 from .user_details import UserDocument
 
-class CommentDocumnet(EmbeddedDocument):
+class CommentDocument(EmbeddedDocument):
     content = StringField(required=True)
     author = StringField(required=True)
+
+    def to_dict(self):
+        return {
+            'content': self.content,
+            'author': self.author
+        }
 
 class PostDocument(Document):
     """Post document."""
@@ -13,7 +19,7 @@ class PostDocument(Document):
     title = StringField(required=True)
     content = StringField(required=True)
     author = ReferenceField(UserDocument) # ReferenceField for connecting another document - relationship
-    comment = ListField(EmbeddedDocumentField(CommentDocumnet)) # List to embedded document - relationship
+    comment = ListField(EmbeddedDocumentField(CommentDocument)) # List to embedded document - relationship
 
     def to_dict(self):
         return {
